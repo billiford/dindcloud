@@ -21,7 +21,6 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
   | tar xz --to-stdout ./docker-credential-gcr \
   > /usr/bin/docker-credential-gcr && chmod +x /usr/bin/docker-credential-gcr
 
-COPY vulnerability_parser /usr/local/bin/
 RUN chmod +x /usr/local/bin/vulnerability_parser
 
 RUN which docker-credential-gcr
