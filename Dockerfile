@@ -21,12 +21,10 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
   | tar xz --to-stdout ./docker-credential-gcr \
   > /usr/bin/docker-credential-gcr && chmod +x /usr/bin/docker-credential-gcr
 
-RUN chmod +x /usr/local/bin/vulnerability_parser
 
 RUN which docker-credential-gcr
-RUN which vulnerability_parser
 
 #include beta capabilities in container
-RUN gcloud components install beta --quiet
+#RUN gcloud components install beta --quiet
 
 RUN docker-credential-gcr configure-docker
