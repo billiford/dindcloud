@@ -1,6 +1,6 @@
-FROM docker
+FROM docker:18.09.7
 
-RUN apk --no-cache add ca-certificates && apk add curl python bash
+RUN apk --no-cache add ca-certificates && apk add curl python bash jq iptables
 
 # Downloading gcloud package
 RUN curl -k https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
@@ -21,10 +21,10 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
   | tar xz --to-stdout ./docker-credential-gcr \
   > /usr/bin/docker-credential-gcr && chmod +x /usr/bin/docker-credential-gcr
 
-COPY vulnerability_parser /usr/local/bin/
-RUN chmod +x /usr/local/bin/vulnerability_parser
 
 RUN which docker-credential-gcr
-RUN which vulnerability_parser
+
+#include beta capabilities in container
+#RUN gcloud components install beta --quiet
 
 RUN docker-credential-gcr configure-docker
