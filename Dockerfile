@@ -25,8 +25,8 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
 RUN which docker-credential-gcr
 
 #get updated root certs (expiring https://google.com(2025) and https://dl.google.com(2043))
-COPY dl.google.com-primary.pem .
-COPY google.com-primary.pem .
+COPY certs/dl.google.com-primary.pem .
+COPY certs/google.com-primary.pem .
 
 #paste updated certs into python lib
 RUN cat dl.google.com-primary.pem >> /usr/local/gcloud/google-cloud-sdk/lib/third_party/httplib2/python2/httplib2/cacerts.txt
