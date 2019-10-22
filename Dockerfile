@@ -24,7 +24,7 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
 
 RUN which docker-credential-gcr
 
-#get updated certs
+#get updated root certs (expiring https://google.com(2025) and https://dl.google.com(2043))
 COPY dl.google.com-primary.pem .
 COPY google.com-primary.pem .
 
