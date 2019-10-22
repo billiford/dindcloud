@@ -24,7 +24,15 @@ RUN curl -fksSL "https://github.com/GoogleCloudPlatform/docker-credential-gcr/re
 
 RUN which docker-credential-gcr
 
+#get updated certs
+COPY dl.google.com-primary.pem .
+COPY google.com-primary.pem .
+
+#paste updated certs into python lib
+RUN cat dl.google.com-primary.pem >> /usr/local/gcloud/google-cloud-sdk/lib/third_party/httplib2/python2/httplib2/cacerts.txt
+RUN cat google.com-primary.pem >> /usr/local/gcloud/google-cloud-sdk/lib/third_party/httplib2/python2/httplib2/cacerts.txt
+
 #include beta capabilities in container
-#RUN gcloud components install beta --quiet
+RUN gcloud components install beta --quiet
 
 RUN docker-credential-gcr configure-docker
